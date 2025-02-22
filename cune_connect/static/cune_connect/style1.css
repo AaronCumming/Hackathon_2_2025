@@ -1,0 +1,126 @@
+li a {
+    color: rgb(0, 255, 4);
+}
+
+
+body {
+    background: rgb(0, 140, 255) 
+}
+
+/*
+url("images/background.jpg") no-repeat;
+*/
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: rgb(255, 235, 235);
+}
+
+/* Container styling for centering the content */
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    width: 80%;
+    max-width: 800px;
+    height: 600px;
+}
+
+/* Main heading styling */
+.main-heading {
+    padding: 2rem 0;
+    text-align: center;
+}
+
+/* Carousel content positioning */
+.carousel-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    z-index: 50;
+}
+.carousel-heading {
+    font-size: 2rem;
+    color: #308d46;
+    margin-bottom: 1rem;
+}
+
+/* Slideshow styling */
+.slideshow {
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Wrapper for the slideshow images */
+.slideshow-wrapper {
+    display: flex;
+    width: 400%; /* 4 images -> 400% width */
+    height: 100%;
+    position: relative; /* Ensure keyframes 'left' works */
+    left: 0;
+    animation: slideshow 20s infinite;
+}
+
+.slide {
+    width: 100%;
+    height: 100%;
+}
+
+.slide-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Keyframe animations */
+@keyframes slideshow {
+    0%, 10% { left: 0; }
+    15%, 25% { left: -100%; }
+    30%, 40% { left: -200%; }
+    45%, 55% { left: -300%; }
+    60%, 70% { left: -200%; }
+    75%, 85% { left: -100%; }
+    90%, 100% { left: 0; }
+}
+
+/* Carousel control buttons */
+.slide-btn {
+    background-color: #bbb;
+    border-radius: 50%;
+    border: .2rem solid #d38800;
+    width: 1.2rem;
+    height: 1.2rem;
+    cursor: pointer;
+    position: absolute;
+    bottom: 3%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 70;
+}
+
+/* Position each button individually */
+.slide-btn-1 { left: 45%; }
+.slide-btn-2 { left: 50%; }
+.slide-btn-3 { left: 55%; }
+.slide-btn-4 { left: 60%; }
+
+/* Stop animation when focused on buttons */
+.slide-btn-1:focus ~ .slideshow-wrapper { animation: none; left: 0; }
+.slide-btn-2:focus ~ .slideshow-wrapper { animation: none; left: -100%; }
+.slide-btn-3:focus ~ .slideshow-wrapper { animation: none; left: -200%; }
+.slide-btn-4:focus ~ .slideshow-wrapper { animation: none; left: -300%; }
+
+/* Button focus styling */
+.slide-btn:focus {
+    background-color: #308d46;
+}

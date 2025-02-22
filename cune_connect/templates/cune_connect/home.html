@@ -1,19 +1,51 @@
 {% load static %}
-
 <link rel="stylesheet" href="{% static 'cune_connect/style.css'%}">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CUNE Connect</title>
+    <link rel="stylesheet" href="{% static 'cune_connect/style.css' %}">
+</head>
+<body>
+
+    <img src="{% static 'cune_connect/images/logo.png' %}" alt="My image" class="logo">
+
+    <h1>Welcome to CUNE Connect!</h1>
+
+    <h3>Here are a list of all of CUNE organizations, clubs, sport teams, etc.</h3>
+    <h3>Click on one to learn more about them and their events.</h3>
+
+    {% if latest_organizations %}
+        <ul>
+        {% for organization in latest_organizations %}
+            <li><a href="{% url 'cune_connect:organization' organization.id %}">{{ organization.organization_name }}</a></li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>No organizations are posted.</p>
+    {% endif %}
+
+    <!-- Moving images container -->
+    <div class="scrolling-container">
+        <div class="scrolling-content">
+            <img src="{% static 'cune_connect/images/art_club.jpg' %}" alt="Image 1">
+            <img src="{% static 'cune_connect/images/background.jpg' %}" alt="Image 2">
+            <img src="{% static 'cune_connect/images/business.jpg' %}" alt="Image 3">
+            <img src="{% static 'cune_connect/images/programming_team.jpg' %}" alt="Image 4">
+            <img src="{% static 'cune_connect/images/social_science.jpg' %}" alt="Image 5">
 
 
-<h1>Welcome to CUNE Connect!</h1>
+            <img src="{% static 'cune_connect/images/art_club.jpg' %}" alt="Image 1">
+            <img src="{% static 'cune_connect/images/background.jpg' %}" alt="Image 2">
+            <img src="{% static 'cune_connect/images/business.jpg' %}" alt="Image 3">
+            <img src="{% static 'cune_connect/images/programming_team.jpg' %}" alt="Image 4">
+            <img src="{% static 'cune_connect/images/social_science.jpg' %}" alt="Image 5">
+        </div>
+    </div>
 
-<h3>Here are a list of all of CUNE organizations, clubs, sport teams, etc.</h3>
-<h3>Clcik on one to learn more about them and their events.</h3>
-{% if latest_organizations %}
-    <ul>
-    {% for organization in latest_organizations %}
-        <li><a href="{% url 'cune_connect:organization' organization.id %}">{{ organization.organization_name }}</a>
-</li>
-    {% endfor %}
-    </ul>
-{% else %}
-    <p>No organizations are posted.</p>
-{% endif %}
+    <img src="{% static 'cune_connect/images/background.jpg' %}" alt="Background Image">
+
+</body>
+</html>

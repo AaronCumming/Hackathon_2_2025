@@ -1,3 +1,74 @@
-li a {
-    color: rgb(0, 76, 255);
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    background-color: #e1b382;
+}
+
+h1, h3 {
+    color: #333;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    margin: 10px;
+}
+
+a {
+    text-decoration: none;
+    color: #0066cc;
+    font-weight: bold;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.logo {
+    width: 150px; /* Adjust width as needed */
+    height: auto;  /* Maintains aspect ratio */
+    display: block;
+    margin: 20px auto; /* Centers the logo */
+}
+
+
+/* Scrolling Images Section */
+.scrolling-wrapper {
+    width: 100%;
+    margin-top: 50px;
+    padding: 20px 0;
+    background: rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    white-space: nowrap;
+    position: relative;
+}
+
+.scrolling-content {
+    display: flex;
+    gap: 20px;
+    width: max-content;
+    animation: scroll 15s linear infinite;
+}
+
+/* Duplicate images to ensure seamless looping */
+.scrolling-content img {
+    width: 1000px;  /* Adjust size as needed */
+    height: 500px;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+/* Continuous Scrolling Animation */
+@keyframes scroll {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(-50%);
+    }
 }
