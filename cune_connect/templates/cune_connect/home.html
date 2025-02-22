@@ -1,0 +1,14 @@
+<h1>Welcome to CUNE Connect!</h1>
+
+<h3>Here are a list of all of CUNE organizations, clubs, sport teams, etc.</h3>
+<h3>Clcik on one to learn more about them and their events.</h3>
+{% if latest_organizations %}
+    <ul>
+    {% for organization in latest_organizations %}
+        <li><a href="{% url 'cune_connect:organization' organization.id %}">{{ organization.organization_name }}</a>
+</li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No organizations are posted.</p>
+{% endif %}

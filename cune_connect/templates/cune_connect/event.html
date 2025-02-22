@@ -1,0 +1,10 @@
+<h1>{{ event.event_name}}</h1>
+
+<h3>When: {{ event.date}}</h3>
+<h3>Where: {{ event.location}}</h3>
+<h4>Who: {{ event.organization.organization_name}}</h4>
+
+<h5>{{ event.description}}</h5>
+    
+
+<a href="{% url 'cune_connect:organization' event.organization.id %}">Back to organization page?</a>

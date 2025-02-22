@@ -1,0 +1,15 @@
+<h1>{{ organization.organization_name}}</h1>
+
+<h5>{{ organization.description}}</h5>
+
+<h3>Regular Meeting Time: {{ organization.regular_meeting_time}}</h3>
+<h3>Location of Regular Meeting Time: {{ organization.location_of_reg_meeting_time}}</h3>
+
+<h2>Upcoming Events:</h2>
+<ul>
+{% for event in organization.event_set.all%}
+    <li><a href="{% url 'cune_connect:event' organization.id event.id %}">{{ event.event_name }}</a></li>
+{% endfor %}
+</ul>
+    
+<a href="{% url 'cune_connect:home' %}">Back to home page?</a>
