@@ -31,7 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'cune_connect.apps.CuneConnectConfig',
+    #'cune_connect.apps.CuneConnectConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'allauth',
-    'allauth.account'
+    'allauth.account',
+    'cune_connect'
 ]
 
 MIDDLEWARE = [
