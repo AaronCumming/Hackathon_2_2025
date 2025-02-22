@@ -1,15 +1,66 @@
-<h1>{{ organization.organization_name}}</h1>
+{% load static %}
 
-<h5>{{ organization.description}}</h5>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ organization.organization_name }}</title>
+    <link rel="stylesheet" href="{% static 'cune_connect/style_org.css' %}">
+</head>
+<body>
 
-<h3>Regular Meeting Time: {{ organization.regular_meeting_time}}</h3>
-<h3>Location of Regular Meeting Time: {{ organization.location_of_reg_meeting_time}}</h3>
+    <header>
+        <img class="logo" src="{% static 'cune_connect/images/logo.png' %}" alt="Logo">
+        <h1>{{ organization.organization_name }}</h1>
+        <h3>{{ organization.description }}</h3>
+        <h3>Regular Meeting Time: {{ organization.regular_meeting_time}}</h3>
+        <h3>Location of Regular Meeting Time: {{ organization.location_of_reg_meeting_time}}</h3>
+        
+        <!-- Add the Home button here -->
+        <a href="{% url 'cune_connect:home' %}" class="home-btn">Back to Home</a>
+    </header>
 
-<h2>Upcoming Events:</h2>
-<ul>
-{% for event in organization.event_set.all%}
-    <li><a href="{% url 'cune_connect:event' organization.id event.id %}">{{ event.event_name }}</a></li>
-{% endfor %}
-</ul>
-    
-<a href="{% url 'cune_connect:home' %}">Back to home page?</a>
+    <section class="events-container">
+        {% for event in organization.event_set.all %}
+            <div class="event {% if forloop.counter|divisibleby:2 %}event-right{% else %}event-left{% endif %}">
+                {% if forloop.counter|divisibleby:2 %}
+                    <div class="event-details">
+                        <h2>{{ event.event_name }}</h2>
+                        <p>{{ event.description }}</p>
+                        <p><strong>Date:</strong> {{ event.date }}</p>
+                        <p><strong>Location:</strong> {{ event.location }}</p>
+                        <a class="event-btn" href="{% url 'cune_connect:event' organization.id event.id %}">View Event</a>
+                    </div>
+                    <div class="event-image">
+                        {% if event.image %}
+                            <img src="{{ event.image.url }}" alt="{{ event.event_name }}">
+                        {% else %}
+                            <p>No image available</p>
+                        {% endif %}
+                    </div>
+                {% else %}
+                    <div class="event-image">
+                        {% if event.image %}
+                            <img src="{{ event.image.url }}" alt="{{ event.event_name }}">
+                        {% else %}
+                            <p>No image available</p>
+                        {% endif %}
+                    </div>
+                    <div class="event-details">
+                        <h2>{{ event.event_name }}</h2>
+                        <p>{{ event.description }}</p>
+                        <p><strong>Date:</strong> {{ event.date }}</p>
+                        <p><strong>Location:</strong> {{ event.location }}</p>
+                        <a class="event-btn" href="{% url 'cune_connect:event' organization.id event.id %}">View Event</a>
+                    </div>
+                {% endif %}
+            </div>
+        {% endfor %}
+    </section>
+
+    <header>
+    <a href="{% url 'cune_connect:home' %}" class="home-btn">Back to Home</a>
+    </header>
+</body>
+</html>

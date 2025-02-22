@@ -20,6 +20,7 @@ class Event(models.Model):
     description = models.CharField(max_length=1000)
     location = models.CharField(max_length=255)
     date = models.DateTimeField("date and time of event")
+    image = models.ImageField(upload_to='cune_connect/images/', null=True, blank=True)
 
     def __str__(self):
         return self.event_name
