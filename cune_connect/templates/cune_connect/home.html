@@ -7,25 +7,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CUNE Connect</title>
     <link rel="stylesheet" href="{% static 'cune_connect/style.css' %}">
+    <script src="{% static 'cune_connect/script.js' %}" defer></script>
 </head>
 <body>
 
-    <img src="{% static 'cune_connect/images/logo.png' %}" alt="My image" class="logo">
-
-    <h1>Welcome to CUNE Connect!</h1>
-
-    <h3>Here are a list of all of CUNE organizations, clubs, sport teams, etc.</h3>
-    <h3>Click on one to learn more about them and their events.</h3>
-
-    {% if latest_organizations %}
-        <ul>
-        {% for organization in latest_organizations %}
-            <li><a href="{% url 'cune_connect:organization' organization.id %}">{{ organization.organization_name }}</a></li>
-        {% endfor %}
-        </ul>
-    {% else %}
-        <p>No organizations are posted.</p>
-    {% endif %}
+    <!-- Header -->
+    <header>
+        <img src="{% static 'cune_connect/images/logo.png' %}" alt="CUNE Connect Logo" class="logo">
+        <h1>Welcome to CUNE Connect!</h1>
+        <h3>Discover CUNE's organizations, clubs, and sports teams.</h3>
+        <h3>Click on one to learn more about their events!</h3>
+    </header>
 
     <!-- Moving images container -->
     <div class="scrolling-container">
@@ -45,7 +37,42 @@
         </div>
     </div>
 
-    <img src="{% static 'cune_connect/images/background.jpg' %}" alt="Background Image">
+
+    <!-- Button to View All Events -->
+    <div class="view-events">
+        <a href="{% url 'cune_connect:upcoming_events' %}" class="events-btn">View All Upcoming Events</a>
+    </div>
+
+<!-- Organizations Display -->
+<section class="organizations">
+    {% if latest_organizations %}
+        <div class="org-grid">
+            {% for org_data in latest_organizations %}
+                <div class="org-card">
+                    <div class="org-image-container">
+                        {% for image in org_data.event_images %}
+                        <img class="org-image {% if forloop.first %}active{% endif %}" src="{{ image }}" alt="{{ org_data.organization.organization_name }}">
+                        {% endfor %}
+                    </div>
+                    <div class="org-details">
+                        <h2>{{ org_data.organization.organization_name }}</h2>
+                        <p>{{ org_data.organization.description }}</p>
+                        <a href="{% url 'cune_connect:organization' org_data.organization.id %}" class="org-btn">View Organization</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>No organizations are posted.</p>
+    {% endif %}
+</section>
+
+<script src="{% static 'cune_connect/script.js' %}" defer></script>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; {% now "Y" %} CUNE Connect. All rights reserved.</p>
+    </footer>
 
 </body>
 </html>

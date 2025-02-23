@@ -3,18 +3,30 @@ from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 from django.views import generic
+from django.views.generic import TemplateView
 
 from .models import Organization, Event
 
 # Create your views here.
-class HomeView(generic.ListView):
+class HomeView(TemplateView):
     template_name = "cune_connect/home.html"
-    context_object_name = "latest_organizations"
 
-    def get_queryset(self):
-        """Return the organizations."""
-        return Organization.objects.order_by("-organization_name")
-    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        organizations = Organization.objects.all()
+
+        org_data = []
+        for org in organizations:
+            events = Event.objects.filter(organization=org).exclude(image__isnull=True).exclude(image="")  
+            event_images = [event.image.url for event in events]  
+
+            org_data.append({
+                "organization": org,
+                "event_images": event_images if event_images else ["/static/cune_connect/images/default.jpg"]
+            })
+
+        context["latest_organizations"] = org_data
+        return context
 
 class OrgView(generic.DetailView):
     model = Organization
