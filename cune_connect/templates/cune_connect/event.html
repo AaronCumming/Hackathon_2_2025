@@ -1,10 +1,54 @@
-<h1>{{ event.event_name}}</h1>
+{% load static %}
 
-<h3>When: {{ event.date}}</h3>
-<h3>Where: {{ event.location}}</h3>
-<h4>Who: {{ event.organization.organization_name}}</h4>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ event.event_name }} - Event Details</title>
+    <link rel="stylesheet" href="{% static 'cune_connect/style_event.css' %}">
+</head>
+<body>
 
-<h5>{{ event.description}}</h5>
-    
+    <header>
+        <img class="logo" src="{% static 'cune_connect/images/logo.png' %}" alt="Logo">
+        <h1>{{ event.event_name }}</h1>
+    </header>
 
-<a href="{% url 'cune_connect:organization' event.organization.id %}">Back to organization page?</a>
+    <section class="event-details">
+        <div class="event-main">
+            <div class="event-text">
+                <h2>Description</h2>
+                <p>{{ event.description }}</p>
+                <p><strong>Date:</strong> {{ event.date }}</p>
+                <p><strong>Location:</strong> {{ event.location }}</p>
+                <a class="event-btn" href="{% url 'cune_connect:organization' event.organization.id %}">Back to Organization</a>
+                <a class="event-btn" href="{% url 'cune_connect:home' %}">Back to Home</a>
+            </div>
+            <div class="event-image">
+                {% if event.image %}
+                    <img src="{{ event.image.url }}" alt="{{ event.event_name }}">
+                {% else %}
+                    <p>No image available</p>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+
+    <section class="other-events">
+        <h3>Other Events from {{ event.organization.organization_name }}</h3>
+        <div class="events-list">
+            {% for other_event in event.organization.event_set.all %}
+                {% if other_event != event %}
+                    <div class="event-item">
+                        <h4>{{ other_event.event_name }}</h4>
+                        <p>{{ other_event.date }}</p>
+                        <a class="event-btn" href="{% url 'cune_connect:event' event.organization.id other_event.id %}">View Event</a>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </section>
+
+</body>
+</html>
