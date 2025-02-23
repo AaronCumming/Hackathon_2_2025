@@ -1,23 +1,3 @@
-// Rotating Images Feature
-const rotatingImages = [
-    "{% static 'cune_connect/images/intramurals.jpg' %}",
-    "{% static 'cune_connect/images/business2.jpg' %}",
-    "{% static 'cune_connect/images/art_club.jpg' %}",
-    "{% static 'cune_connect/images/programming_team.jpg' %}",
-    "{% static 'cune_connect/images/social_science.jpg' %}"
-];
-
-let currentIndex = 0;
-const rotatingImg = document.getElementById("rotating-image");
-
-function changeRotatingImage() {
-    currentIndex = (currentIndex + 1) % rotatingImages.length;
-    rotatingImg.src = rotatingImages[currentIndex];
-    setTimeout(changeRotatingImage, Math.floor(Math.random() * (15000 - 5000 + 1) + 5000)); // Random interval 5-15 seconds
-}
-
-setTimeout(changeRotatingImage, 5000);
-
 document.addEventListener("DOMContentLoaded", function () {
     const orgCards = document.querySelectorAll(".org-card");
 
