@@ -13,6 +13,9 @@
     <header>
         <img class="logo" src="{% static 'cune_connect/images/logo.png' %}" alt="Logo">
         <h1>{{ event.event_name }}</h1>
+        <nav>
+            <a href="{% url 'cune_connect:home' %}" class="nav-btn">Home</a>
+          </nav>
     </header>
 
     <section class="event-details">
@@ -22,9 +25,7 @@
                 <p>{{ event.description }}</p>
                 <p><strong>Date:</strong> {{ event.date }}</p>
                 <p><strong>Location:</strong> {{ event.location }}</p>
-                <a class="event-btn" href="{% url 'cune_connect:organization' event.organization.id %}">Back to Organization</a>
-                <a class="event-btn" href="{% url 'cune_connect:home' %}">Back to Home</a>
-            </div>
+                <a class="event-btn" href="{% url 'cune_connect:organization' event.organization.id %}">Back to Organization</a>            </div>
             <div class="event-image">
                 {% if event.image %}
                     <img src="{{ event.image.url }}" alt="{{ event.event_name }}">
@@ -49,6 +50,13 @@
             {% endfor %}
         </div>
     </section>
+
+    <footer>
+        <nav>
+            <a href="{% url 'cune_connect:home' %}" class="nav-btn">Home</a>
+          </nav>
+        <p>&copy; {% now "Y" %} CUNE Connect. All rights reserved.</p>
+      </footer>
 
 </body>
 </html>

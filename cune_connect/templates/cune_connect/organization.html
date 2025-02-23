@@ -18,7 +18,9 @@
         <h3>Location of Regular Meeting Time: {{ organization.location_of_reg_meeting_time}}</h3>
         
         <!-- Add the Home button here -->
-        <a href="{% url 'cune_connect:home' %}" class="home-btn">Back to Home</a>
+        <nav>
+            <a href="{% url 'cune_connect:home' %}" class="nav-btn">Home</a>
+          </nav>
     </header>
 
     <section class="events-container">
@@ -59,8 +61,12 @@
         {% endfor %}
     </section>
 
-    <header>
-    <a href="{% url 'cune_connect:home' %}" class="home-btn">Back to Home</a>
-    </header>
+    <footer>
+        <nav>
+            <a href="{% url 'cune_connect:home' %}" class="nav-btn">Home</a>
+          </nav>
+        <p>&copy; {% now "Y" %} CUNE Connect. All rights reserved.</p>
+      </footer>
+
 </body>
 </html>

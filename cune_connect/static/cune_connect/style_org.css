@@ -106,3 +106,25 @@ header {
     }
 }
 
+.nav-btn {
+    background-color: #003d80;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background 0.3s ease;
+    margin-top: 10px;
+  }
+  
+  .nav-btn:hover {
+    background-color: #002e60;
+  }
+
+  footer {
+    background-color: #0056b3;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    margin-top: 20px;
+  }
+  
