@@ -30,6 +30,12 @@ class EventView(generic.DetailView):
         """Get event based on event_id"""
         event_id = self.kwargs["event_id"]
         return get_object_or_404(Event,pk=event_id)
+    
+
+def upcoming_events_view(request):
+    period = request.GET.get('filter', 'all')
+    events = Event.upcoming_events(period=period)
+    return render(request, 'cune_connect/upcoming_events.html', {'events': events})
 
 
 

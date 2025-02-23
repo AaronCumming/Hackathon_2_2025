@@ -14,6 +14,7 @@ class Organization(models.Model):
     def __str__(self):
         return self.organization_name
     
+    
 class Event(models.Model):
     organization = models.ForeignKey(Organization, on_delete=models.CASCADE)
     event_name = models.CharField(max_length=255)
@@ -26,6 +27,17 @@ class Event(models.Model):
         return self.event_name
 
 
-    def up_coming_event(self):
-        return self.date >= timezone.now() - datetime.timedelta(days=7)
+    @classmethod
+    def upcoming_events(cls, period=None):
+        """Returns events from now until a end date, ordered by time."""
+        now = timezone.now()
+        if period == 'today':
+            end = now.replace(hour=23, minute=59, second=59)
+        elif period == 'week':
+            end = now + datetime.timedelta(days=7)
+        elif period == 'month':
+            end = now + datetime.timedelta(days=31)
+        else:
+            end = now + datetime.timedelta(days=500)
+        return cls.objects.filter(date__gte=now, date__lte=end).order_by('date')
     

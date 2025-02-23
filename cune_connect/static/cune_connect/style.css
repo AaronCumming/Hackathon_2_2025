@@ -52,7 +52,7 @@ a:hover {
     display: flex;
     gap: 20px;
     width: max-content;
-    animation: scroll 15s linear infinite;
+    animation: scroll 25s linear infinite;
 }
 
 /* Duplicate images to ensure seamless looping */

@@ -1,0 +1,58 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Upcoming Events</title>
+  <link rel="stylesheet" href="{% static 'cune_connect/style_up_coming_events.css' %}">
+</head>
+<body>
+
+  <header>
+    <img class="logo" src="{% static 'cune_connect/images/logo.png' %}" alt="Logo">
+    <h1>Upcoming Events</h1>
+    <nav>
+      <a href="{% url 'cune_connect:home' %}" class="nav-btn">Home</a>
+    </nav>
+  </header>
+
+  <section class="filters">
+    <!-- Each button reloads the page with a different GET parameter 'filter' -->
+    <button onclick="window.location.href='?filter=today'" class="filter-btn">Today's Events</button>
+    <button onclick="window.location.href='?filter=week'" class="filter-btn">This Week's Events</button>
+    <button onclick="window.location.href='?filter=month'" class="filter-btn">This Month's Events</button>
+    <button onclick="window.location.href='?filter=all'" class="filter-btn">All Upcoming</button>
+  </section>
+
+  <section class="events-list">
+    {% if events %}
+      {% for event in events %}
+        <div class="event-card">
+          <div class="card-header">
+            <div class="event-name">
+              <h2>{{ event.event_name }}</h2>
+            </div>
+            <div class="event-button">
+              <a href="{% url 'cune_connect:event' event.organization.id event.id %}" class="event-btn">View Event</a>
+            </div>
+          </div>
+          <div class="card-body">
+            <p>{{ event.description }}</p>
+            <p><strong>Date:</strong> {{ event.date|date:"M d, Y H:i" }}</p>
+            <p><strong>Location:</strong> {{ event.location }}</p>
+            <p><strong>Organization:</strong> {{ event.organization.organization_name }}</p>
+          </div>
+        </div>
+      {% endfor %}
+    {% else %}
+      <p>No upcoming events found.</p>
+    {% endif %}
+  </section>
+
+  <footer>
+    <p>&copy; {% now "Y" %} CUNE Connect. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>
